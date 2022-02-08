@@ -1,0 +1,25 @@
+
+5.1 Ќа локальной машине:
+
+1) —копировать любой каталог из системы, в котором насчитываетс€ больше 5 разных форматов файлов,
+в удобное место.
+  
+Copy-Item -Path "D:\test" -Destination "D:\powershell" -Recurse          
+  #  опируем папку test с переименованием в папку powershell
+
+2) –асформировать все файлы по каталогам с именем соответствующим их формату. (‘айлы *.txt в
+каталог txt и т.д.)
+
+New-Item -Path D:\powershell\txt -ItemType Directory          
+ # —оздаем дирикторию txt ( аналогично zip, jpg, apk, exe)
+
+Move-Item -Path D:\powershell\*.txt -Destination D:\powershell\txt\        
+# ѕеремещаем все файлы с расширением .txt в папку txt (аналогично с другими файлами)
+
+3) ¬ывести информацию о количестве файлов в каждом каталоге, общий размер (сортировка по количеству файлов)
+
+Get-ChildItem D:\powershell\txt\*.txt | Measure -Property Length -sum 
+
+4) ѕереименовать каталоги, у которых количество файлов меньше 3, в Уsmall_1Ф, Уsmall_2Ф, Уsmall_3Ф ит.д.
+
+Rename-item -path 'exe' -Newname 'small_1'

@@ -1,0 +1,38 @@
+«адание 1
+Ќапишите запрос,  который  вывел бы номер документа, дату создани€ и создател€ записи дл€ всех строк из таблицы StkDocs .
+
+Select NumDoc, DateWrt, Creator from  StkDocs
+
+«адание 2
+Ќапишите запросы, которые вывели бы:
+   * Ќаименовани€ всех контрагентов, у которых имеетс€ телефон (таблицы Contras  и Telct ) и поле Respondent пустое.
+
+SELECT Contras.Nm_Ct, Telct.TelNum 
+FROM Contras INNER JOIN Telct
+ON Contras.CodCt = Telct.CodCt where Telct.TelNum is not null AND Telct.Respondent is null
+
+   * Ќаименовани€ всех контрагентов и телефоны дл€ тех из них, у которых он существует.
+
+SELECT Contras.Nm_Ct, Telct.TelNum 
+FROM Contras INNER JOIN Telct
+ON Contras.CodCt = Telct.CodCt where Telct.TelNum is not null
+
+   * Ќаименование и количество указанных телефонов тех  контрагентов, у которых указано более одного телефона. 
+
+SELECT Contras.Nm_Ct, count (Telct.TelNum) 
+FROM Contras INNER JOIN Telct
+ON Contras.CodCt = Telct.CodCt 
+group by Contras.Nm_Ct
+having count(Telct.TelNum)>1
+
+   * Ќаименовани€ контрагентов, у которых не прив€зано ни одного телефона.
+
+SELECT Contras.Nm_Ct, Telct.TelNum 
+FROM Contras LEFT JOIN Telct
+ON Contras.CodCt = Telct.CodCt where Telct.TelNum is null
+
+«адание 3
+Ќапишите запрос, который может дать вам все записи со значени€ми суммы в поле  SummaGdSrv  больше чем 1,500.( таблица StkDocsGdsAndSrv ).
+
+Select * from StkDocsGdsAndSrv where SummaGdSrv > 1500
+
